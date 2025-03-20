@@ -1,0 +1,24 @@
+[package]
+name = "krux-fuzz-fuzz"
+version = "0.0.1"
+publish = false
+edition = "2024"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+base32 = "0.5.1"
+serde_json = "1.0.140"
+serde = "1.0.219"
+
+[dependencies.krux-fuzz]
+path = ".."
+
+[[bin]]
+name = "diff_base32"
+path = "fuzz_targets/diff_base32.rs"
+test = false
+doc = false
+bench = false

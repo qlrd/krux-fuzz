@@ -1,0 +1,8 @@
+/target
+/krux
+/**/__pycache__/**
+/**/crash-*
+/**/target
+/**/corpus
+/**/artifacts
+/**/coverage
