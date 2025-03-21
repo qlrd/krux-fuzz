@@ -8,10 +8,11 @@ edition = "2024"
 cargo-fuzz = true
 
 [dependencies]
+call_python_script = { path = "../crates/call_python_script" }
 libfuzzer-sys = "0.4"
 base32 = "0.5.1"
+rust-bip39 = "1.0.0"
 serde_json = "1.0.140"
-serde = "1.0.219"
 
 [dependencies.krux-fuzz]
 path = ".."
@@ -19,6 +20,13 @@ path = ".."
 [[bin]]
 name = "diff_base32"
 path = "fuzz_targets/diff_base32.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "diff_bip39"
+path = "fuzz_targets/diff_bip39.rs"
 test = false
 doc = false
 bench = false

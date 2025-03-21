@@ -6,3 +6,5 @@
 /**/corpus
 /**/artifacts
 /**/coverage
+Cargo.lock
+**/Cargo.lock
