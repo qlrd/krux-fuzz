@@ -11,7 +11,24 @@ If we get some error, maybe we found a bug :)
 
 ## Prepare environment
 
-To use `krux-fuzz` you'll need both python and rust.
+To use `krux-fuzz` you'll need both `libsecp256k1`, `python` and rust.
+
+### libsecp256k1
+
+This module will be used by both `krux` and `embit`:
+
+```bash
+git clone https://github.com/bitcoin-core/secp256k1.git
+cd secp256k1
+./autogen.sh
+./configure \
+  --enable-module-recovery
+  --enable-experimental \
+  --enable-module-ecdh \
+  --enable-module-schnorrsig
+make
+sudo make install
+```
 
 ### Rust
 
@@ -81,7 +98,7 @@ just fuzz
 
 - [`krux/src/bbqr.py`](https://github.com/selfcustody/krux/blob/main/src/krux/bbqr.py): [BBQR](https://bbqr.org/) encoding/decoding with base32 uppercase format;
 
-## BAKING...
+## BAKING
 
 - None :/
 

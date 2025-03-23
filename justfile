@@ -4,6 +4,8 @@ default:
 
 clean:
     cargo clean
+    rm -rf diybitcoinhardware
+    rm -rf selfcustody
 
 lint:
     cargo +nightly fmt --all && cargo +nightly clippy --all-targets
