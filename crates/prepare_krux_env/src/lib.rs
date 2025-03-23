@@ -42,8 +42,7 @@ fn create_dir_and_its_init_file(
 /// run
 ///
 /// create directories, __init__ files and download requested krux sources
-pub fn run(output_dir: &str, urls: Vec<&str>) -> Result<(), Box<dyn Error>> {
-    let base_url = "https://github.com/selfcustody/krux/raw/main/";
+pub fn run(base_url: &str, output_dir: &str, urls: Vec<&str>) -> Result<(), Box<dyn Error>> {
     let output_root = Path::new(output_dir);
 
     // Track seen directories and init files

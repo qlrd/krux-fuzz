@@ -12,7 +12,14 @@ format:
     cargo +nightly fmt --all --check
 
 prepare:
-    cargo run --bin prepare-fuzz
+    cargo +nightly run --bin prepare-fuzz
 
-fuzz: 
-    cargo fuzz run diff_base32
+list:
+  cargo +nightly fuzz list
+
+diff_base32: 
+    cargo +nightly fuzz run diff_base32
+
+diff_bip39:
+  cargo +nightly fuzz run diff_bip39
+
