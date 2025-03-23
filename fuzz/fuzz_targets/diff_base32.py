@@ -1,16 +1,20 @@
+import json
 import os
 import sys
-import json
 from argparse import ArgumentParser
 
+# add selfcustody/src/krux to PATH
 script_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.abspath(os.path.join(script_dir, '..', '..'))
-sys.path.insert(0, project_root)
+selfcustody_root = os.path.join(script_dir, "..", "..", "selfcustody")
+project_root = os.path.join(selfcustody_root, "src", "krux")
+sys.path.insert(0, os.path.abspath(project_root))
 
-from krux.src.bbqr import base32_encode_stream, base32_decode_stream
+# import bbqr
+from bbqr import base32_decode_stream, base32_encode_stream
 
 parser = ArgumentParser(prog="diff_base32")
 parser.add_argument("-d", "--data", type=str)
+
 
 def main():
     args = parser.parse_args()
@@ -28,6 +32,7 @@ def main():
         print(json.dumps({"result": list(decoded)}))
     else:
         raise ValueError("Invalid action")
+
 
 if __name__ == "__main__":
     main()
