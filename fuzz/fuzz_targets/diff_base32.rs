@@ -8,28 +8,46 @@ fuzz_target!(|data: &[u8]| {
         let alphabet = base32::Alphabet::Rfc4648 { padding };
 
         let rust_encoded = base32::encode(alphabet, data);
-        let python_encoded: String = call_python_script::run(
+        let krux_encoded: String = call_python_script::run(
             "fuzz/fuzz_targets/diff_base32.py",
             &serde_json::json!({
+                "module": "krux",
                 "action": "encode",
                 "padding": padding,
                 "input": data,
             }),
         )
-        .expect("Python encode failed");
+        .expect("krux encode failed");
+        assert_eq!(rust_encoded, krux_encoded);
 
-        assert_eq!(rust_encoded, python_encoded);
+        // BBQr do not have code for padding in utils module
+        if !padding {
+            let bbqr_encoded: String = call_python_script::run(
+                "fuzz/fuzz_targets/diff_base32.py",
+                &serde_json::json!({
+                    "module": "bbqr",
+                    "action": "encode",
+                    "padding": padding,
+                    "input": data,
+                }),
+            )
+            .expect("bbqr encode failed");
 
-        let python_decoded: Vec<u8> = call_python_script::run(
+            assert_eq!(krux_encoded, bbqr_encoded);
+            assert_eq!(rust_encoded, bbqr_encoded);
+        }
+
+        let krux_decoded: Vec<u8> = call_python_script::run(
             "fuzz/fuzz_targets/diff_base32.py",
             &serde_json::json!({
+                "module": "krux",
                 "action": "decode",
                 "padding": padding,
                 "input": rust_encoded.as_bytes(),
             }),
         )
-        .expect("Python decode failed");
+        .expect("krux decode failed");
 
-        assert_eq!(data, &python_decoded);
+        assert_eq!(data, krux_decoded);
     }
 });

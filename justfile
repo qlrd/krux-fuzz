@@ -4,8 +4,13 @@ default:
 
 clean:
     cargo clean
+    rm -rf crates/call_python_script/target/**
+    rm -rf fuzz/target/**
     rm -rf diybitcoinhardware
     rm -rf selfcustody
+    rm -rf BBQr
+    rm -rf fuzz/artifacts
+    rm -rf fuzz/corpus
 
 lint:
     cargo +nightly fmt --all && cargo +nightly clippy --all-targets

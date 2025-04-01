@@ -26,5 +26,11 @@ fn main() -> Result<(), Box<dyn Error>> {
             "https://github.com/selfcustody/krux/raw/main/src/krux/bbqr.py",
             "https://github.com/selfcustody/krux/raw/main/src/krux/bip39.py",
         ],
+    )?;
+
+    run(
+        "https://github.com/coinkite/BBQr/raw/master/",
+        "BBQr",
+        vec!["https://github.com/coinkite/BBQr/raw/master/python/bbqr/utils.py"],
     )
 }
