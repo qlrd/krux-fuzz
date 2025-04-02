@@ -1,0 +1,17 @@
+services:
+  fuzz-base32:
+    build: .
+    volumes:
+      - ./corpus_diff_base32:/app/fuzz/corpus
+      - ./artifacts_diff_base32:/app/fuzz/artifacts
+      - ./logs:/app/fuzz/diff_base32.log
+    command: "just diff_base32"
+
+  fuzz-bip39:
+    build: .
+    volumes:
+      - ./corpus_diff_bip39:/app/fuzz/corpus
+      - ./artifacts_diff_base32:/app/fuzz/artifacts
+      - ./logs:/app/fuzz/diff_bip39.log
+    command: "just diff_bip39"
+
